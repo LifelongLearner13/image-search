@@ -4,16 +4,18 @@
   "description": "A simple project to experiment with various CSS layouts using AngularJS partials.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js"
   },
   "author": "Sierra Gregg",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^4.0.0",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "node-fetch": "^1.7.3"
   },
   "devDependencies": {
+    "cross-env": "^5.0.5",
     "eslint": "^4.7.0",
     "morgan": "^1.8.2",
     "nodemon": "^1.12.1"
