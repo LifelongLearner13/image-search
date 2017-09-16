@@ -17,8 +17,24 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.static('./public/build/'));
 
 // API endpoint
-app.get('/', (request, response) => {
+app.get('/api/search/:q', (request, response) => {
+  const query = request.params.q;
+  const pageNum = request.query.page || 1;
+  
+  const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' +
+              process.env.FLICKER_KEY + '&text=' + query +
+              '&safe_search=1&content_type=1&extras=description%2C+license%2C+date_taken%2C+' + 
+              'owner_name%2C+path_alias%2C+url_o&page=' +
+              pageNum + '&format=json&nojsoncallback=1';
 
+  fetch(url).then(flickrResponse => {
+    return flickrResponse.json();
+  }).then(data => {
+    response.json(data);
+  }).catch(error => {
+    console.error('ERROR:', error.message || error);
+    response.status(500);
+  });
 });
 
 
