@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Serves the frontend code at the root
-app.use(express.static('./public/build/'));
+app.use(express.static('./public/'));
 
 // API endpoint
 app.get('/api/search/:q', (request, response) => {
